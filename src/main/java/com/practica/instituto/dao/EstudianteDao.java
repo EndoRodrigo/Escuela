@@ -39,8 +39,8 @@ public class EstudianteDao {
 		
 	}
 	
-	public void eliminarEstudiante(int id) {
-		Estudiante user = entityManager.find(Estudiante.class, id);
+	public void eliminarEstudiante(String id) {
+		Estudiante user = entityManager.find(Estudiante.class,Integer.parseInt(id));
 		entityManager.remove(user);
 	}
 
