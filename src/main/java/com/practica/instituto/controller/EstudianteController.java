@@ -55,6 +55,7 @@ public class EstudianteController {
 			    responseBody.put("Message","El campos apellido es oblogatorio");
 				return  new ResponseEntity<Object>(responseBody,HttpStatus.BAD_REQUEST);
 			}
+			
 			estudianteDao.createEstudiante(estudiante);
 			responseBody.put("Status","OK");
 		    responseBody.put("Message","Estudiante registrado con exito!");
