@@ -83,18 +83,13 @@ public class EstudianteController {
 	}
 	
 	@RequestMapping(value = "api/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> eliminarAlumno(@PathVariable String id) {
+	public ResponseEntity<Object> eliminarAlumno(@PathVariable int id) {
 		try {
-			if (id.matches("[0-9]*")) {
-				  estudianteDao.eliminarEstudiante(id);
-				  responseBody.put("Status","OK");
-				  responseBody.put("Message","Estudiante eliminado con exito");
-				  return new ResponseEntity<Object>(responseBody,HttpStatus.OK);
-			}else {
-				  responseBody.put("Status","FAILED");
-				  responseBody.put("Message","Validar estructuras de los datos enviados");
-				  return new ResponseEntity<Object>(responseBody,HttpStatus.BAD_REQUEST);
-			}
+			estudianteDao.eliminarEstudiante(id);
+			responseBody.put("Status","OK");
+			responseBody.put("Message","Estudiante eliminado con exito");
+		    return new ResponseEntity<Object>(responseBody,HttpStatus.OK);
+
 		} catch (Exception ex) {
 		    responseBody.put("Status","FAILED");
 		    responseBody.put("Message",ex.getCause().toString());

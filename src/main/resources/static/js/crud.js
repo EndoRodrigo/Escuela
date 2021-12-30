@@ -62,3 +62,18 @@ async function registraEstudiante(){
   alert("La cuenta fue creada con exito!");
 
 }
+
+async function eliminarEstudiante(){
+ let id = document.getElementById('txtid').value;
+ console.log(id);
+	const request = await fetch('api/delete/'+id, {
+    method: 'DELETE',
+    headers: getHeader()
+  });
+  
+  const estudiantes = await request.json();
+  console.log(estudiantes);
+  
+    location.reload();
+
+}
