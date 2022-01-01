@@ -77,3 +77,50 @@ async function eliminarEstudiante(){
     location.reload();
 
 }
+
+async function estudianteSelecionado(){
+	
+	let id = document.getElementById('txtid').value;
+	
+	const request = await fetch('api/alumno/'+id, {
+    method: 'GET',
+    headers: getHeader()
+  });
+  
+    const estudiantes = await request.json();
+    console.log(estudiantes);
+    
+    document.getElementById('txtNombre').value = estudiantes.nombre;
+    document.getElementById('txtApellido').value = estudiantes.apellido;
+    document.getElementById('txtEdad').value = estudiantes.edad;
+    document.getElementById('txtGenero').value = estudiantes.genero;
+    document.getElementById('txtCurso').value = estudiantes.curso;
+    document.getElementById('txtMatricula').checked = estudiantes.matricula;
+
+}
+
+async function actualizarEstudiante(){
+	let datos = {};
+	datos.id = parseInt(document.getElementById('txtid').value);
+	datos.nombre = document.getElementById('txtNombre').value;
+	datos.apellido = document.getElementById('txtApellido').value;
+	datos.edad = parseInt(document.getElementById('txtEdad').value); ;
+	let tipoGenero = document.getElementById('txtGenero');
+	datos.genero = tipoGenero.options[tipoGenero.selectedIndex].value;
+	datos.curso = document.getElementById('txtCurso').value;
+	datos.matricula = document.getElementById('txtMatricula').checked;
+	
+	const request = await fetch('api/actualizar', {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datos)
+  });
+  
+  const estudiantes = await request.json();
+  console.log(estudiantes);
+  alert("Informacion actualizada con exito!");
+
+}

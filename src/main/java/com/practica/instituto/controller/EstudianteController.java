@@ -28,6 +28,17 @@ public class EstudianteController {
 	EstudianteDao estudianteDao;
 	
 	Map<String,String> responseBody = new HashMap<>();
+	
+	@RequestMapping(value = "api/alumno/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Object> GetEstudiante(@PathVariable int id){
+		try {
+		    return  new ResponseEntity<Object>(estudianteDao.getEstudianteActualizar(id),HttpStatus.OK);
+		} catch (Exception ex) {
+			responseBody.put("Status","FAILED");
+		    responseBody.put("Message",ex.getCause().toString());
+		    return  new ResponseEntity<Object>(responseBody,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@RequestMapping(value = "api/Estudiante", method = RequestMethod.GET)
 	public ResponseEntity<Object> obtenerListaEstudiantes() {

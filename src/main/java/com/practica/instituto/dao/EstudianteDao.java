@@ -22,19 +22,17 @@ public class EstudianteDao {
 		return entityManager.createQuery(query).getResultList();
 	}
 	
+	public Estudiante getEstudianteActualizar(int id) {
+		Estudiante infoEstudiante =  entityManager.find(Estudiante.class, id);
+		return infoEstudiante;
+	}
+	
 	public void createEstudiante(Estudiante estudiante) {
 		entityManager.merge(estudiante);
 	}
 	
 	public void actualizarEstudiante(Estudiante estudiante) {
-		Estudiante actualInfo = entityManager.find(Estudiante.class, estudiante.getId());
-		actualInfo.setNombre(estudiante.getNombre());
-		actualInfo.setApellido(estudiante.getApellido());
-		actualInfo.setEdad(estudiante.getEdad());
-		actualInfo.setGenero(estudiante.getGenero());
-		actualInfo.setCurso(estudiante.getCurso());
-		actualInfo.setMatricula(estudiante.isMatricula());
-		entityManager.merge(actualInfo);
+		entityManager.merge(estudiante);
 		//entityManager.persist(actualInfo);
 		
 	}
@@ -43,5 +41,7 @@ public class EstudianteDao {
 		Estudiante user = entityManager.find(Estudiante.class,id);
 		entityManager.remove(user);
 	}
+	
+
 
 }
